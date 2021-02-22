@@ -1,0 +1,28 @@
+<h3>List Category</h3>
+<h3>Show list Category</h3>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  
+    
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+        <td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
+    </ng-container>
+      
+    
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+      
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element; let i = index"> 
+          <button mat-raised-button color="primary" type="submit" (click)="editCategory(i)">Edit</button>
+          <button mat-raised-button color="accent" type="submit" (click)="deleteCategory(i)">Delete</button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>

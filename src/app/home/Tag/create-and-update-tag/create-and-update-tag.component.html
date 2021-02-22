@@ -1,0 +1,21 @@
+<h3>Create and Update Category</h3>
+<form class="example-form shadow p-3 mb-5 bg-white rounded" [formGroup]="tags" novalidate width="100%">
+    <mat-form-field class="example-full-width">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" placeholder="Name tag" formControlName="name" required minlength="3" maxlength="10">
+        <mat-error *ngIf="tags.controls['name'].invalid && (tags.controls['name'].dirty || tags.controls['name'].touched)">
+            <div *ngIf="tags.controls['name'].errors.required">Name is Required</div>
+            <div *ngIf="tags.controls['name'].errors.minlength">Minium 3 Chracters are Required</div>
+            <div *ngIf="tags.controls['name'].errors.maxlength">Maxium 10 Chracters are Required</div>
+        </mat-error>
+      </mat-form-field>
+
+
+      <section>
+        <div class="example-button-row">
+            <button mat-raised-button color="primary" type="submit" *ngIf="CheckCreate" (click)="addTag()">Submit</button>
+            <button mat-raised-button color="primary" type="submit" *ngIf="CheckUpdate" (click)="updateTag()">Update</button>
+            <button mat-raised-button color="warn" type="submit" (click)="back()" >Back</button>
+        </div>
+    </section>
+</form>
