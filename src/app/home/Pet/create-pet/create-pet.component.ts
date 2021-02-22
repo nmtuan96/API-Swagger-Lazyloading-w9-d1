@@ -24,9 +24,10 @@ export class CreatePetComponent implements OnInit {
   listTag: any = [];
   listCheckTag: any = [];
   booleanTag : Boolean= false;
-  checkCategory: any;
   
   listPhotoUrls: any = [];
+  
+  dataCategory: "";
   constructor(private fb: FormBuilder, private router: Router, private localStorage: LocalStorageService, private petService: PetService) { }
 
   ngOnInit(): void {
@@ -34,11 +35,10 @@ export class CreatePetComponent implements OnInit {
     this.listTag = this.localStorage.get('2');
   }
   addPet(){
-    this.checkCategory= this.pet.value.category;
     this.listPhotoUrls.push(this.pet.value.photoUrls);
     this.pet.value.photoUrls=[];
     this.pet.controls['tags'].setValue(this.listCheckTag);
-    this.pet.controls['category'].setValue(this.listCategory[this.checkCategory]);
+    this.pet.controls['category'].setValue(this.dataCategory);
     this.pet.controls['id'].setValue(2323);
     this.pet.value.photoUrls = this.listPhotoUrls;
     
@@ -77,21 +77,7 @@ export class CreatePetComponent implements OnInit {
       this.isValidateTag = false;
     }
   }
-
-  isValidatedCategory = false;
   
-  changeCategory(e){
-    let numberCheckValidateCate = e.target.value;
-    this.pet.controls['category'].setValue(e.target.value, {onlySelf: true});
-    if(!numberCheckValidateCate){
-      this.isValidatedCategory = true;
-    }else{
-      this.isValidatedCategory = false;
-    }
-    if(numberCheckValidateCate === 0){
-      this.isValidatedCategory = false;
-    }
-  }
   isValidatedPet = false;
   changeStatus(e){
     this.pet.controls['status'].setValue(e.target.value, {onlySelf: true});
@@ -100,5 +86,9 @@ export class CreatePetComponent implements OnInit {
     }else{
       this.isValidatedPet = false;
     }
+  }
+
+  receiveMessage(e){
+    this.dataCategory = e;
   }
 }

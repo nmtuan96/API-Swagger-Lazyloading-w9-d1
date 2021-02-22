@@ -16,12 +16,15 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { CreatePetComponent } from './create-pet/create-pet.component';
 import { ShowListPetComponent } from './show-list-pet/show-list-pet.component';
 import { UpdatePetComponent } from './update-pet/update-pet.component';
+import { DropdownCategoryComponent } from './dropdown/dropdown-category/dropdown-category.component';
+
 
 @NgModule({
   declarations: [
     CreatePetComponent,
     ShowListPetComponent,
-    UpdatePetComponent
+    UpdatePetComponent,
+    DropdownCategoryComponent
   ],
   imports: [
     CommonModule,

@@ -11,13 +11,7 @@
       </mat-form-field>
 
 
-      <mat-form-field appearance="fill" class="example-full-width">
-        <mat-label>Category</mat-label>
-        <select matNativeControl formControlName="category" (click)="changeCategory($event)" required>
-          <option *ngFor="let category of listCategory,let i = index" value="{{i}}">{{category.name}} </option>
-        </select>
-        <mat-error *ngIf="isValidatedCategory">Choose Category!</mat-error>
-      </mat-form-field>
+      <app-dropdown-category (sendCategory)="receiveMessage($event)" ></app-dropdown-category>
 
       
       <section class="example-section">
@@ -50,7 +44,7 @@
 
       <section>
         <div class="example-button-row">
-            <button mat-raised-button color="primary" type="submit" (click)="addPet()" [disabled]="!pet.valid || isValidatedCategory || isValidatedPet || isValidateTag" >Submit</button>
+            <button mat-raised-button color="primary" type="submit" (click)="addPet()" [disabled]="!pet.valid || isValidatedPet || isValidateTag" >Submit</button>
             <!-- <button mat-raised-button color="primary" type="submit" (click)="updatePet()">Update</button> -->
             <button mat-raised-button color="warn" type="submit" (click)="back()" >Back</button>
         </div>
