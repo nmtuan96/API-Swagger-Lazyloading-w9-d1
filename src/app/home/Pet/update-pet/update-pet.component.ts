@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PetService } from 'src/app/service/APi-Pet/pet.service';
 import { LocalStorageService } from 'src/app/service/local-storage/local-storage.service';
@@ -142,5 +142,8 @@ export class UpdatePetComponent implements OnInit {
     }else{
       this.isValidatedPet = false;
     }
+  }
+  getControl(key: string): AbstractControl {
+    return this.pet.get(key);
   }
 }

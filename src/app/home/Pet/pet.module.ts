@@ -18,7 +18,7 @@ import { ShowListPetComponent } from './show-list-pet/show-list-pet.component';
 import { UpdatePetComponent } from './update-pet/update-pet.component';
 import { DropdownCategoryComponent } from './dropdown/dropdown-category/dropdown-category.component';
 import { DropdownStatusComponent } from './component-input/dropdown-status/dropdown-status.component';
-
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -43,6 +43,7 @@ import { DropdownStatusComponent } from './component-input/dropdown-status/dropd
     MatSelectModule,
     MatProgressBarModule,
     FormsModule,
+    MatPaginatorModule
   ]
 })
 export class PetModule { }

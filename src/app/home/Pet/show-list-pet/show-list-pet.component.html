@@ -3,6 +3,7 @@
 <button mat-raised-button color="primary" (click)="availablePet()">Show list Available</button>
 <button mat-raised-button color="primary" (click)="pendingPet()">Show list Pending</button>
 <button mat-raised-button color="primary" (click)="soldPet()">Show list Sold</button>
+<div class="mat-elevation-z8">
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   
     
@@ -53,7 +54,11 @@
           <button mat-raised-button color="accent" type="submit" (click)="deletePet(element.id)">Delete</button>
         </td>
     </ng-container>
-
+    
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+  <mat-paginator showFirstLastButtons
+    [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator>
+</div>

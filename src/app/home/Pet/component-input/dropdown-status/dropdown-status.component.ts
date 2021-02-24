@@ -1,5 +1,5 @@
-import { Component, forwardRef, OnInit } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'app-dropdown-status',
@@ -11,6 +11,11 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
       useExisting: forwardRef(() => DropdownStatusComponent),
       multi: true
     },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => DropdownStatusComponent),
+      multi: true
+    }
   ]
 })
 export class DropdownStatusComponent implements OnInit, ControlValueAccessor {
@@ -20,6 +25,7 @@ export class DropdownStatusComponent implements OnInit, ControlValueAccessor {
   onTouched: () => void;
   disable: boolean;
   private status: 'available' | 'pending' | 'sold';
+  @Input('type') type;
 
   constructor() { }
   isSelect(statusIndex: number): boolean {
@@ -45,7 +51,31 @@ export class DropdownStatusComponent implements OnInit, ControlValueAccessor {
   handleOnStatusChange(e) {
     const statusId = parseInt(e.target.value);
     const statusSelect = this.listStatus.find(status => status === this.listStatus[statusId]);
+    if(statusSelect){
+      this.isBooleanCheck = false; 
+    }
     this.writeValue(statusSelect);
     this.onChange(statusSelect);
+  }
+
+  validate(c: FormControl){
+    if(!this.status){
+      return null;
+    }
+    return this.status !== this.type ? null : {
+      type: {
+        valid: false,
+        actual: c.value
+      }
+    }
+  }
+
+  isBooleanCheck = false;
+  checkValidationStatus(){
+    if(!this.status){
+      this.isBooleanCheck = true; 
+    }else{
+      this.isBooleanCheck = false; 
+    }
   }
 }

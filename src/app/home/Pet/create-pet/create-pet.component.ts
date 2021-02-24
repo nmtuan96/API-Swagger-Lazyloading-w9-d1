@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { PetService } from 'src/app/service/APi-Pet/pet.service';
 import { LocalStorageService } from 'src/app/service/local-storage/local-storage.service';
@@ -17,16 +17,17 @@ export class CreatePetComponent implements OnInit {
       id: new FormControl('', [Validators.required]),
     },
     tags: new FormControl(''),
-    status: new FormControl(''),
+    status: new FormControl('', [Validators.required]),
     photoUrls: new FormControl(''),
   });
   listCategory: any =[];
   listTag: any = [];
   listCheckTag: any = [];
   booleanTag : Boolean= false;
-  
+  statusValidation: 'available' | 'pending' | 'sold';
   listPhotoUrls: any = [];
-  
+  isValidateTag= false;
+
   dataCategory: "";
   constructor(private fb: FormBuilder, private router: Router, private localStorage: LocalStorageService, private petService: PetService) { }
 
@@ -41,10 +42,7 @@ export class CreatePetComponent implements OnInit {
     this.pet.controls['category'].setValue(this.dataCategory);
     this.pet.controls['id'].setValue(2323);
     this.pet.value.photoUrls = this.listPhotoUrls;
-    if(this.pet.value.status === ""){
-      this.isValidatedStatus =true;
-      return;
-    }
+    console.log(this.pet.value);
     this.listCheckTag = [];
     this.listPhotoUrls= [];
     this.petService.addPet(this.pet.value)
@@ -61,7 +59,7 @@ export class CreatePetComponent implements OnInit {
     this.router.navigateByUrl('/pets');
   }
 
-  isValidateTag= false;
+  
   changeSelection(i){
     for (let checktag of this.listCheckTag) {
       if(checktag == this.listTag[i]){
@@ -81,13 +79,11 @@ export class CreatePetComponent implements OnInit {
     }
   }
   
-  isValidatedStatus = false;
-  changeStatus(e){
-    if(!e.target.value){
-      this.isValidatedStatus = true;
-    }else{
-      this.isValidatedStatus = false;
-    }
+  
+
+
+  getControl(key: string): AbstractControl {
+    return this.pet.get(key);
   }
 
   receiveMessage(e){

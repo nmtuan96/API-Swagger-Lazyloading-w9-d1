@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { PetService } from 'src/app/service/APi-Pet/pet.service';
@@ -14,6 +15,7 @@ export class ShowListPetComponent implements OnInit {
   list: any = [];
   checkPetDelete: any;
   
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(private service: PetService, private router: Router) { }
 
   ngOnInit(): void {
@@ -21,19 +23,22 @@ export class ShowListPetComponent implements OnInit {
   availablePet(){
     this.service.getDataPetAvailable()
       .then( res => { this.list = res;
-                      this.dataSource.data = this.list; })
+                      this.dataSource.data = this.list;
+                      this.dataSource.paginator = this.paginator;})
       .catch( e => { window.alert('Connection Error!')})
   }
   pendingPet(){
     this.service.getDataPetPending()
       .then( res => { this.list = res;
-                      this.dataSource.data = this.list; })
+                      this.dataSource.data = this.list;
+                      this.dataSource.paginator = this.paginator; })
       .catch( e => { window.alert('Connection Error!')})
   }
   soldPet(){
     this.service.getDataPetSold()
       .then( res => { this.list = res;
-                      this.dataSource.data = this.list; })
+                      this.dataSource.data = this.list;
+                      this.dataSource.paginator = this.paginator; })
       .catch( e => { window.alert('Connection Error!')})
   }
 

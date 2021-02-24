@@ -33,14 +33,16 @@
 
       <div>
         <mat-label for="status">Status: </mat-label>
-        <app-dropdown-status formControlName="status" (click)="changeStatus($event)" ></app-dropdown-status>
-        <mat-error *ngIf="isValidatedStatus">Choose Status!</mat-error>
+
+        <app-dropdown-status formControlName="status" [type]="''"></app-dropdown-status>
+        <mat-error *ngIf="getControl('status').invalid && getControl('status').errors.type">Status is not correct</mat-error>
+
       </div>
 
 
       <section>
         <div class="example-button-row">
-            <button mat-raised-button color="primary" type="submit" (click)="addPet()" [disabled]="!pet.valid || isValidateTag || isValidatedStatus" >Submit</button>
+            <button mat-raised-button color="primary" type="submit" (click)="addPet()" [disabled]="!pet.valid || isValidateTag" >Submit</button>
             <!-- <button mat-raised-button color="primary" type="submit" (click)="updatePet()">Update</button> -->
             <button mat-raised-button color="warn" type="submit" (click)="back()" >Back</button>
         </div>

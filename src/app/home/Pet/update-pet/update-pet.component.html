@@ -14,7 +14,7 @@
       <mat-form-field appearance="fill" class="example-full-width">
         <mat-label>Category</mat-label>
         <select matNativeControl required formControlName="category" (change)="changeCategory($event)" >
-          <option *ngFor="let category of listCategory,let i = index"  value="{{i}}">{{category.name}} </option>
+          <option *ngFor="let category of listCategory,let i = index"  value="{{i}}" >{{category.name}}</option>
         </select>
         <mat-error *ngIf="isValidatedCategory">Choose Category!</mat-error>
       </mat-form-field>
@@ -37,7 +37,7 @@
       </div>
       <br>
 
-      <mat-form-field appearance="fill">
+      <!-- <mat-form-field appearance="fill">
         <mat-label>Status</mat-label>
         <select matNativeControl required formControlName="status" (change)="changeStatus($event)">
           <option value="available">Available</option>
@@ -45,8 +45,13 @@
           <option value="sold">Sold</option>
         </select>
         <mat-error *ngIf="isValidatedPet">Choose Status!</mat-error>
-      </mat-form-field>
+      </mat-form-field> -->
 
+      <div>
+        <mat-label>Status</mat-label>
+        <app-dropdown-status formControlName="status" [type]="''"></app-dropdown-status>
+        <mat-error *ngIf="getControl('status').invalid && getControl('status').errors.type">Status is not correct</mat-error>
+      </div>
 
       <section>
         <div class="example-button-row">

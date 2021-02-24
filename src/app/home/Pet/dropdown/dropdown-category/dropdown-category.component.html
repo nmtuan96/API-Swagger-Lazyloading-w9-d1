@@ -1,7 +1,7 @@
 <mat-form-field appearance="fill" class="example-full-width">
     <mat-label>Category</mat-label>
-    <mat-select (ngModelChange)="changeCategory($event)"  [(ngModel)]="indexCategory">
+    <mat-select (ngModelChange)="changeCategory($event)"  [(ngModel)]="indexCategory" (click)="checkValidation()">
       <mat-option *ngFor="let category of listCategory,let i = index" [value]="i">{{category.name}} </mat-option>
     </mat-select>
-    <!-- <mat-error *ngIf="isValidatedCategory">Choose Category!</mat-error> -->
+    <mat-error *ngIf="isValidatedCategory">Choose Category!</mat-error>
 </mat-form-field>

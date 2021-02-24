@@ -12,13 +12,23 @@ export class DropdownCategoryComponent implements OnInit {
   indexCategory:any;
   constructor(private localStorage: LocalStorageService,) { }
   @Output() sendCategory = new EventEmitter();
-
+  isValidatedCategory = false;
   ngOnInit(): void {
     this.listCategory = this.localStorage.get('1');
   }
 
   changeCategory(evt){
     this.categories = this.listCategory[evt];
+    if(this.categories){
+      this.isValidatedCategory = false;
+    }
     this.sendCategory.emit(this.categories);
+  }
+  checkValidation(){
+    if(!this.categories){
+      this.isValidatedCategory = true;
+    }else{
+      this.isValidatedCategory = false;
+    }
   }
 }
