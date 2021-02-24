@@ -1,0 +1,3 @@
+<select (change)="handleOnStatusChange($event)" (focus)="onTouched()" [disabled]="disable">
+    <option *ngFor="let status of listStatus, let i = index" [value]="i" [selected]="isSelect(i)">{{status}}</option>
+</select>

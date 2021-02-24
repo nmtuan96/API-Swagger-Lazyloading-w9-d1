@@ -17,6 +17,7 @@ import { CreatePetComponent } from './create-pet/create-pet.component';
 import { ShowListPetComponent } from './show-list-pet/show-list-pet.component';
 import { UpdatePetComponent } from './update-pet/update-pet.component';
 import { DropdownCategoryComponent } from './dropdown/dropdown-category/dropdown-category.component';
+import { DropdownStatusComponent } from './component-input/dropdown-status/dropdown-status.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { DropdownCategoryComponent } from './dropdown/dropdown-category/dropdown
     CreatePetComponent,
     ShowListPetComponent,
     UpdatePetComponent,
-    DropdownCategoryComponent
+    DropdownCategoryComponent,
+    DropdownStatusComponent
   ],
   imports: [
     CommonModule,

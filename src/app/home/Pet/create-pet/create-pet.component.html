@@ -31,20 +31,16 @@
       </div>
       <br>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Status</mat-label>
-        <select matNativeControl required formControlName="status" (click)="changeStatus($event)">
-          <option value="available">Available</option>
-          <option value="pending">Pending</option>
-          <option value="sold">Sold</option>
-        </select>
-        <mat-error *ngIf="isValidatedPet">Choose Status!</mat-error>
-      </mat-form-field>
+      <div>
+        <mat-label for="status">Status: </mat-label>
+        <app-dropdown-status formControlName="status" (click)="changeStatus($event)" ></app-dropdown-status>
+        <mat-error *ngIf="isValidatedStatus">Choose Status!</mat-error>
+      </div>
 
 
       <section>
         <div class="example-button-row">
-            <button mat-raised-button color="primary" type="submit" (click)="addPet()" [disabled]="!pet.valid || isValidatedPet || isValidateTag" >Submit</button>
+            <button mat-raised-button color="primary" type="submit" (click)="addPet()" [disabled]="!pet.valid || isValidateTag || isValidatedStatus" >Submit</button>
             <!-- <button mat-raised-button color="primary" type="submit" (click)="updatePet()">Update</button> -->
             <button mat-raised-button color="warn" type="submit" (click)="back()" >Back</button>
         </div>
