@@ -12,7 +12,7 @@ import { LocalStorageService } from 'src/app/service/local-storage/local-storage
 export class CreatePetComponent implements OnInit {
   pet: any = this.fb.group({
     id: new FormControl(''),
-    name: new FormControl('',[Validators.required, Validators.minLength(3), Validators.maxLength(10)]),
+    name: new FormControl(''),
     category: {
       id: new FormControl('', [Validators.required]),
     },
