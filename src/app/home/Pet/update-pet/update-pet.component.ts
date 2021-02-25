@@ -76,7 +76,7 @@ export class UpdatePetComponent implements OnInit {
         this.dataPet = res;
         this.pet.controls['id'].setValue(this.dataPet.id);
         this.pet.controls['name'].setValue(this.dataPet.name);
-        this.pet.controls['category'].setValue(this.dataPet.category);
+        this.pet.controls['category'].setValue(this.dataPet.category.id -1);
         this.pet.controls['status'].setValue(this.dataPet.status);
         this.pet.controls['tags'].setValue(this.dataPet.tags);
         this.listPhotoUrls = this.dataPet.photoUrls;

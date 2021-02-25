@@ -19,6 +19,7 @@ import { UpdatePetComponent } from './update-pet/update-pet.component';
 import { DropdownCategoryComponent } from './dropdown/dropdown-category/dropdown-category.component';
 import { DropdownStatusComponent } from './component-input/dropdown-status/dropdown-status.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { DebounceClickDirective } from '../directives/debounce-click.directive';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     ShowListPetComponent,
     UpdatePetComponent,
     DropdownCategoryComponent,
-    DropdownStatusComponent
+    DropdownStatusComponent,
+    DebounceClickDirective,
   ],
   imports: [
     CommonModule,

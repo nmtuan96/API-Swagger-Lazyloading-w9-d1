@@ -25,42 +25,30 @@ export class ShowListPetComponent implements OnInit {
       .then( res => { this.list = res;
                       this.dataSource.data = this.list;
                       this.dataSource.paginator = this.paginator;})
-      .catch( e => { window.alert('Connection Error!')})
+      .catch( e => { window.alert('Connection Error!')});
   }
   pendingPet(){
     this.service.getDataPetPending()
       .then( res => { this.list = res;
                       this.dataSource.data = this.list;
                       this.dataSource.paginator = this.paginator; })
-      .catch( e => { window.alert('Connection Error!')})
+      .catch( e => { window.alert('Connection Error!')});
   }
   soldPet(){
     this.service.getDataPetSold()
       .then( res => { this.list = res;
                       this.dataSource.data = this.list;
                       this.dataSource.paginator = this.paginator; })
-      .catch( e => { window.alert('Connection Error!')})
+      .catch( e => { window.alert('Connection Error!')});
   }
 
   deletePet(e){
-    this.service.detailPet(e)
-      .then( res => {
-        this.checkPetDelete = res; 
-        this.service.deletePet(e);
-        if(this.checkPetDelete.status == "available"){
-          this.availablePet();
-          window.location.reload();
-        }
-        if(this.checkPetDelete.status == "pending"){
-          this.pendingPet();
-          window.location.reload();
-        }
-        if(this.checkPetDelete.status == "sold"){
-          this.soldPet();
-          window.location.reload();
-        }
-      })
-      .catch( e => { window.alert('Connection Error!')});
+    this.service.deletePet(e)
+    .then(res => {
+      console.log("success");
+      window.location.reload();
+    })
+    .catch( e => { window.alert('Connection Error!')});
     
   }
   

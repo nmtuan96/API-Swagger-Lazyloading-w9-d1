@@ -42,7 +42,6 @@ export class CreatePetComponent implements OnInit {
     this.pet.controls['category'].setValue(this.dataCategory);
     this.pet.controls['id'].setValue(2323);
     this.pet.value.photoUrls = this.listPhotoUrls;
-    console.log(this.pet.value);
     this.listCheckTag = [];
     this.listPhotoUrls= [];
     this.petService.addPet(this.pet.value)
@@ -79,9 +78,6 @@ export class CreatePetComponent implements OnInit {
     }
   }
   
-  
-
-
   getControl(key: string): AbstractControl {
     return this.pet.get(key);
   }

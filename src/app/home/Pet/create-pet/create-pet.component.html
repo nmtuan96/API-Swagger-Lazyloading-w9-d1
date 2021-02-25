@@ -42,8 +42,7 @@
 
       <section>
         <div class="example-button-row">
-            <button mat-raised-button color="primary" type="submit" (click)="addPet()" [disabled]="!pet.valid || isValidateTag" >Submit</button>
-            <!-- <button mat-raised-button color="primary" type="submit" (click)="updatePet()">Update</button> -->
+            <button mat-raised-button color="primary" type="submit" [debounceTime]="700" (debounceClick)="addPet()" [disabled]="!pet.valid || isValidateTag" appDebounceClick>Submit</button>
             <button mat-raised-button color="warn" type="submit" (click)="back()" >Back</button>
         </div>
     </section>

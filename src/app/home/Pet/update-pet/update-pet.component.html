@@ -48,14 +48,13 @@
       </mat-form-field> -->
 
       <div>
-        <mat-label>Status</mat-label>
         <app-dropdown-status formControlName="status" [type]="''"></app-dropdown-status>
         <mat-error *ngIf="getControl('status').invalid && getControl('status').errors.type">Status is not correct</mat-error>
       </div>
 
       <section>
         <div class="example-button-row">
-            <button mat-raised-button color="primary" type="submit" (click)="UpdatePet()">Update</button>
+            <button mat-raised-button color="primary" [debounceTime]="700" type="submit" (debounceClick)="UpdatePet()" appDebounceClick>Update</button>
             <button mat-raised-button color="warn" type="submit" (click)="back()" >Back</button>
         </div>
     </section>
