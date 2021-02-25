@@ -1,49 +1,45 @@
 <h3>Create and Update Category</h3>
 <form class="example-form shadow p-3 mb-5 bg-white rounded" [formGroup]="pet" novalidate width="100%">
-    <mat-form-field class="example-full-width">
-        <mat-label>Name</mat-label>
-        <input matInput type="text" placeholder="Name Pet" formControlName="name" required minlength="3" maxlength="10">
-        <mat-error *ngIf="pet.controls['name'].invalid && (pet.controls['name'].dirty || pet.controls['name'].touched)">
-            <div *ngIf="pet.controls['name'].errors.required">Name is Required</div>
-            <div *ngIf="pet.controls['name'].errors.minlength">Minium 3 Chracters are Required</div>
-            <div *ngIf="pet.controls['name'].errors.maxlength">Maxium 10 Chracters are Required</div>
-        </mat-error>
-      </mat-form-field>
+  
+  
+  
+  <div class="example-full-width">
+    <app-input-name formControlName="name" required minlength="3" maxlength="10"></app-input-name>
+  </div>
 
 
-      <app-dropdown-category (sendCategory)="receiveMessage($event)" ></app-dropdown-category>
+  <app-dropdown-category (sendCategory)="receiveMessage($event)" ></app-dropdown-category>
 
       
-      <section class="example-section">
-        <mat-label>Tags</mat-label>
-        <span class="example-list-section">
-          <div *ngFor="let tag of listTag,let i = index">
-            <mat-checkbox  (change)="changeSelection(i)">{{tag.name}}</mat-checkbox>
-          </div>
-        </span>
-        <mat-error *ngIf="isValidateTag">Choose Tag!</mat-error>
-      </section>
+  <section class="example-section">
+    <mat-label>Tags</mat-label>
+      <span class="example-list-section">
+        <div *ngFor="let tag of listTag,let i = index">
+          <mat-checkbox  (change)="changeSelection(i)">{{tag.name}}</mat-checkbox>
+        </div>
+      </span>
+    <mat-error *ngIf="isValidateTag">Choose Tag!</mat-error>
+  </section>
 
 
-      <div>
-        <mat-label>Choose Image:  </mat-label>
-          <input type="file" formControlName="photoUrls">
-      </div>
+  <div>
+    <mat-label>Choose Image:  </mat-label>
+      <input type="file" formControlName="photoUrls">
+  </div>
       <br>
 
-      <div>
-        <mat-label for="status">Status: </mat-label>
 
-        <app-dropdown-status formControlName="status" [type]="''"></app-dropdown-status>
-        <mat-error *ngIf="getControl('status').invalid && getControl('status').errors.type">Status is not correct</mat-error>
+  <div>
+    <mat-label for="status">Status: </mat-label>
+      <app-dropdown-status formControlName="status" [type]="''"></app-dropdown-status>
+      <mat-error *ngIf="getControl('status').invalid && getControl('status').errors.type">Status is not correct</mat-error>
+  </div>
 
-      </div>
-
-
-      <section>
-        <div class="example-button-row">
-            <button mat-raised-button color="primary" type="submit" [debounceTime]="700" (debounceClick)="addPet()" [disabled]="!pet.valid || isValidateTag" appDebounceClick>Submit</button>
-            <button mat-raised-button color="warn" type="submit" (click)="back()" >Back</button>
-        </div>
-    </section>
+  
+  <section>
+    <div class="example-button-row">
+      <button mat-raised-button color="primary" type="submit" [debounceTime]="700" (debounceClick)="addPet()" [disabled]="!pet.valid || isValidateTag" appDebounceClick>Submit</button>
+      <button mat-raised-button color="warn" type="submit" (click)="back()" >Back</button>
+    </div>
+  </section>
 </form>

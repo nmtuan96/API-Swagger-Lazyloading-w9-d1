@@ -20,6 +20,7 @@ import { DropdownCategoryComponent } from './dropdown/dropdown-category/dropdown
 import { DropdownStatusComponent } from './component-input/dropdown-status/dropdown-status.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { DebounceClickDirective } from '../directives/debounce-click.directive';
+import { InputNameComponent } from './component-input/input-name/input-name.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { DebounceClickDirective } from '../directives/debounce-click.directive';
     DropdownCategoryComponent,
     DropdownStatusComponent,
     DebounceClickDirective,
+    InputNameComponent,
   ],
   imports: [
     CommonModule,

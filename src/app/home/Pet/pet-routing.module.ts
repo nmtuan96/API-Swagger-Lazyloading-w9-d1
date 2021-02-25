@@ -5,7 +5,7 @@ import { ShowListPetComponent } from './show-list-pet/show-list-pet.component';
 import { UpdatePetComponent } from './update-pet/update-pet.component';
 
 const routes: Routes = [
-  { path: '', component: ShowListPetComponent},
+  { path: '', component: ShowListPetComponent },
   { path: 'create', component: CreatePetComponent },
   { path: 'update/:id', component: UpdatePetComponent },
 ];
