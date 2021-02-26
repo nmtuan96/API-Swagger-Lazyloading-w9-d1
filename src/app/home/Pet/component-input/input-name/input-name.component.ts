@@ -1,5 +1,5 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
-import { FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-input-name',
@@ -10,33 +10,41 @@ import { FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators } from '@angu
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef( ()=> InputNameComponent),
       multi: true
+    },
+     {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => InputNameComponent),
+      multi: true
     }
   ]
 })
-export class InputNameComponent implements OnInit {
+export class InputNameComponent implements OnInit, ControlValueAccessor,Validator  {
 
+ 
   public name = new FormControl('',[Validators.required, Validators.minLength(3), Validators.maxLength(10)]);
-  onChange: (abc: String) => void;
   onTouched: ()=> void;
   disabled: boolean;
+  @Input() childData: any;
 
   constructor() { }
 
-  writeValue(value : string): void {
-    this.name.setValue(value);
+  writeValue(val) {
+    this.name.setValue(val);
   }
-  registerOnChange(fn: any): void {
-    this.onChange = fn;
+
+  registerOnChange(fn) {
+    this.name.valueChanges.subscribe(fn);
   }
-  registerOnTouched(fn: any): void {
+
+  registerOnTouched(fn) {
     this.onTouched = fn;
-  }
-  setDisabledState?(isDisabled: boolean): void {
-    this.disabled= isDisabled;
   }
 
   ngOnInit(): void {
   }
   
-
+  validate(c: AbstractControl): ValidationErrors | null{
+    return this.name.valid ? null : { invalidForm: {valid: false}};
+  }
+  
 }

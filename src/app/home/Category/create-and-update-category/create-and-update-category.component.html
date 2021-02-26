@@ -2,7 +2,7 @@
 <form class="example-form shadow p-3 mb-5 bg-white rounded" [formGroup]="category" novalidate width="100%">
     <mat-form-field class="example-full-width">
         <mat-label>Name</mat-label>
-        <input matInput type="text" placeholder="Name Category" formControlName="name" required minlength="3" maxlength="10">
+        <input matInput type="text" placeholder="Name Category" formControlName="name" required minlength="3" maxlength="10" ngDefaultControl>
         <mat-error *ngIf="category.controls['name'].invalid && (category.controls['name'].dirty ||category.controls['name'].touched)">
             <div *ngIf="category.controls['name'].errors.required">Name is Required</div>
             <div *ngIf="category.controls['name'].errors.minlength">Minium 3 Chracters are Required</div>

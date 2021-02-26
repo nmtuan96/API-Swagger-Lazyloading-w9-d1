@@ -14,8 +14,8 @@
   <section class="example-section">
     <mat-label>Tags</mat-label>
       <span class="example-list-section">
-        <div *ngFor="let tag of listTag,let i = index">
-          <mat-checkbox  (change)="changeSelection(i)">{{tag.name}}</mat-checkbox>
+        <div *ngFor="let tag of listTag,let i = index" >
+          <mat-checkbox  (change)="changeSelection(i)" required>{{tag.name}}</mat-checkbox>
         </div>
       </span>
     <mat-error *ngIf="isValidateTag">Choose Tag!</mat-error>
@@ -43,3 +43,5 @@
     </div>
   </section>
 </form>
+<p>Valid: {{getControl('name').valid}}</p>
+<p>{{!pet.valid}}</p>

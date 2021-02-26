@@ -27,6 +27,7 @@ export class CreatePetComponent implements OnInit {
   statusValidation: 'available' | 'pending' | 'sold';
   listPhotoUrls: any = [];
   isValidateTag= false;
+  parentDataName: false;
 
   dataCategory: "";
   constructor(private fb: FormBuilder, private router: Router, private localStorage: LocalStorageService, private petService: PetService) { }
@@ -39,19 +40,23 @@ export class CreatePetComponent implements OnInit {
     this.listPhotoUrls.push(this.pet.value.photoUrls);
     this.pet.value.photoUrls=[];
     this.pet.controls['tags'].setValue(this.listCheckTag);
+    if(this.listCheckTag.length === 0){
+      this.isValidateTag = true;
+      return;
+    }
     this.pet.controls['category'].setValue(this.dataCategory);
     this.pet.controls['id'].setValue(2323);
     this.pet.value.photoUrls = this.listPhotoUrls;
     this.listCheckTag = [];
     this.listPhotoUrls= [];
-    this.petService.addPet(this.pet.value)
-      .then(res => {
-        this.pet.reset();
-        this.router.navigateByUrl("/pets");
-        })
-      .catch(e => {
-        this.pet.reset();
-        window.alert('Connection Error!'); })
+    // this.petService.addPet(this.pet.value)
+    //   .then(res => {
+    //     this.pet.reset();
+    //     this.router.navigateByUrl("/pets");
+    //     })
+    //   .catch(e => {
+    //     this.pet.reset();
+    //     window.alert('Connection Error!'); })
   }
   back(){
     this.pet.reset();
@@ -60,13 +65,14 @@ export class CreatePetComponent implements OnInit {
 
   
   changeSelection(i){
+    debugger;
     for (let checktag of this.listCheckTag) {
-      if(checktag == this.listTag[i]){
+      if(checktag === this.listTag[i]){
         this.booleanTag = true;
       }
     }
     if(this.booleanTag){
-      this.listCheckTag.splice(i, 1);
+      this.listCheckTag = this.listCheckTag.filter(tags => tags !== this.listTag[i]);
       this.booleanTag = false;
     }else{
       this.listCheckTag.push(this.listTag[i]);
