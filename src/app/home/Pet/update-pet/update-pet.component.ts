@@ -31,6 +31,9 @@ export class UpdatePetComponent implements OnInit {
   listPhotoUrls: any = [];
   checkCategory: any;
   idFistCate: Number;
+  isValidatedPet = false;
+  isValidateTag= false;
+  isValidatedCategory = false;
 
   constructor(private fb: FormBuilder, private router: Router, private localStorage: LocalStorageService, private petService: PetService,private actRoute: ActivatedRoute) {
     this.value= parseInt(this.actRoute.snapshot.params.id);
@@ -99,7 +102,8 @@ export class UpdatePetComponent implements OnInit {
       }
     }
   }
-  isValidateTag= false;
+  
+
   changeSelection(i){
     let listCheckTagUpdate = [];
     if(this.listCheckBooleanTag[i]){
@@ -121,7 +125,7 @@ export class UpdatePetComponent implements OnInit {
   }
 
 
-  isValidatedCategory = false;
+  
   changeCategory(e){
     let numberCheckValidateCate = e.target.value;
     this.pet.controls['category'].setValue(e.target.value, {onlySelf: true});
@@ -134,7 +138,9 @@ export class UpdatePetComponent implements OnInit {
       this.isValidatedCategory = false;
     }
   }
-  isValidatedPet = false;
+  
+
+
   changeStatus(e){
     this.pet.controls['status'].setValue(e.target.value, {onlySelf: true});
     if(!e.target.value){

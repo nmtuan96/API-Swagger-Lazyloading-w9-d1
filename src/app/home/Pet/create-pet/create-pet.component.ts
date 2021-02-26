@@ -49,14 +49,14 @@ export class CreatePetComponent implements OnInit {
     this.pet.value.photoUrls = this.listPhotoUrls;
     this.listCheckTag = [];
     this.listPhotoUrls= [];
-    // this.petService.addPet(this.pet.value)
-    //   .then(res => {
-    //     this.pet.reset();
-    //     this.router.navigateByUrl("/pets");
-    //     })
-    //   .catch(e => {
-    //     this.pet.reset();
-    //     window.alert('Connection Error!'); })
+    this.petService.addPet(this.pet.value)
+      .then(res => {
+        this.pet.reset();
+        this.router.navigateByUrl("/pets");
+        })
+      .catch(e => {
+        this.pet.reset();
+        window.alert('Connection Error!'); })
   }
   back(){
     this.pet.reset();
@@ -65,7 +65,6 @@ export class CreatePetComponent implements OnInit {
 
   
   changeSelection(i){
-    debugger;
     for (let checktag of this.listCheckTag) {
       if(checktag === this.listTag[i]){
         this.booleanTag = true;

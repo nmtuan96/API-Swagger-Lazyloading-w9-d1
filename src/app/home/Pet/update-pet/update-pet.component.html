@@ -1,14 +1,9 @@
 <h3>Create and Update Category</h3>
 <form class="example-form shadow p-3 mb-5 bg-white rounded" [formGroup]="pet" novalidate width="100%">
-    <mat-form-field class="example-full-width">
-        <mat-label>Name</mat-label>
-        <input matInput type="text" placeholder="Name Pet" formControlName="name" required minlength="3" maxlength="10">
-        <mat-error *ngIf="pet.controls['name'].invalid && (pet.controls['name'].dirty || pet.controls['name'].touched)">
-            <div *ngIf="pet.controls['name'].errors.required">Name is Required</div>
-            <div *ngIf="pet.controls['name'].errors.minlength">Minium 3 Chracters are Required</div>
-            <div *ngIf="pet.controls['name'].errors.maxlength">Maxium 10 Chracters are Required</div>
-        </mat-error>
-      </mat-form-field>
+
+      <div class="example-full-width">
+        <app-input-name formControlName="name"></app-input-name>
+      </div>
 
 
       <mat-form-field appearance="fill" class="example-full-width">
@@ -37,16 +32,6 @@
       </div>
       <br>
 
-      <!-- <mat-form-field appearance="fill">
-        <mat-label>Status</mat-label>
-        <select matNativeControl required formControlName="status" (change)="changeStatus($event)">
-          <option value="available">Available</option>
-          <option value="pending">Pending</option>
-          <option value="sold">Sold</option>
-        </select>
-        <mat-error *ngIf="isValidatedPet">Choose Status!</mat-error>
-      </mat-form-field> -->
-
       <div>
         <app-dropdown-status formControlName="status" [type]="''"></app-dropdown-status>
         <mat-error *ngIf="getControl('status').invalid && getControl('status').errors.type">Status is not correct</mat-error>
@@ -54,7 +39,7 @@
 
       <section>
         <div class="example-button-row">
-            <button mat-raised-button color="primary" [debounceTime]="700" type="submit" (debounceClick)="UpdatePet()" appDebounceClick>Update</button>
+            <button mat-raised-button color="primary" [debounceTime]="700" type="submit" (debounceClick)="UpdatePet()" [disabled]="!pet.valid" appDebounceClick>Update</button>
             <button mat-raised-button color="warn" type="submit" (click)="back()" >Back</button>
         </div>
     </section>
