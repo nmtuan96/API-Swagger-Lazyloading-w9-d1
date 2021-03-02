@@ -54,8 +54,6 @@ export class UpdatePetComponent implements OnInit {
       this.listPhotoUrls.push(this.pet.value.photoUrls);
       this.pet.value.photoUrls=[];
     }
-    
-    this.pet.controls['id'].setValue(2323);
     this.pet.value.photoUrls = this.listPhotoUrls;
     this.listCheckTag = [];
     this.listPhotoUrls= [];

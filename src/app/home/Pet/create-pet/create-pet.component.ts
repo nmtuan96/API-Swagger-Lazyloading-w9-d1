@@ -46,7 +46,6 @@ export class CreatePetComponent implements OnInit {
     }
     this.pet.controls['category'].setValue(this.dataCategory);
     this.pet.controls['id'].setValue(Math.floor(Math.random() * (10000 - 1 + 1)) + 1);
-    debugger;
     this.pet.value.photoUrls = this.listPhotoUrls;
     this.listCheckTag = [];
     this.listPhotoUrls= [];

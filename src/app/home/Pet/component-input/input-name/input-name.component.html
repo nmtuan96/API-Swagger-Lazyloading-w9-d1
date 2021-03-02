@@ -1,10 +1,10 @@
 
-<mat-form-field class="example-full-width">
+<mat-form-field class="example-full-width" [formGroup]="formGroup">
   <mat-label>Name</mat-label>
-  <input matInput type="text" placeholder="Name" [formControl]="name" required minlength="3" maxlength="10" matNativeControl>
-  <mat-error *ngIf="name.invalid && (name.dirty || name.touched)">
-    <div *ngIf="name.errors.required">Name is Required</div>
-    <div *ngIf="name.errors.minlength">Minium 3 Chracters are Required</div>
-    <div *ngIf="name.errors.maxlength">Maxium 10 Chracters are Required</div>
+  <input matInput type="text" placeholder="Name" formControlName="nameInput" required minlength="3" maxlength="10" matNativeControl>
+  <mat-error *ngIf="formGroup.controls['nameInput'].invalid && (formGroup.controls['nameInput'].dirty ||formGroup.controls['nameInput'].touched)">
+    <div *ngIf="formGroup.controls['nameInput'].errors.required">Name is Required</div>
+    <div *ngIf="formGroup.controls['nameInput'].errors.minlength">Minium 3 Chracters are Required</div>
+    <div *ngIf="formGroup.controls['nameInput'].errors.maxlength">Maxium 10 Chracters are Required</div>
 </mat-error>
 </mat-form-field>

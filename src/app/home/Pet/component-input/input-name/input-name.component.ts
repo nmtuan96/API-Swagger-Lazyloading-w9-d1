@@ -1,5 +1,5 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator, Validators } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors, Validator, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-input-name',
@@ -20,19 +20,20 @@ import { AbstractControl, ControlValueAccessor, FormControl, FormGroup, NG_VALID
 })
 export class InputNameComponent implements OnInit, ControlValueAccessor,Validator  {
 
- 
-  public name = new FormControl('',[Validators.required, Validators.minLength(3), Validators.maxLength(10)]);
+ formGroup= this.fb.group({
+  nameInput : new FormControl('',[Validators.required, Validators.minLength(3), Validators.maxLength(10)])
+ })
   onTouched: ()=> void;
   disabled: boolean;
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
   writeValue(val) {
-    this.name.setValue(val);
+    this.formGroup.controls.nameInput.setValue(val);
   }
 
   registerOnChange(fn) {
-    this.name.valueChanges.subscribe(fn);
+    this.formGroup.controls.nameInput.valueChanges.subscribe(fn);
   }
 
   registerOnTouched(fn) {
@@ -43,7 +44,7 @@ export class InputNameComponent implements OnInit, ControlValueAccessor,Validato
   }
   
   validate(c: AbstractControl): ValidationErrors | null{
-    return this.name.valid ? null : { invalidForm: {valid: false}};
+    return this.formGroup.controls.nameInput.valid ? null : { invalidForm: {valid: false}};
   }
   
 }
