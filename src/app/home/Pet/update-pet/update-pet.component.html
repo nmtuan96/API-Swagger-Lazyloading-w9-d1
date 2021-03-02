@@ -33,8 +33,7 @@
       <br>
 
       <div>
-        <app-dropdown-status formControlName="status" [type]="''"></app-dropdown-status>
-        <mat-error *ngIf="getControl('status').invalid && getControl('status').errors.type">Status is not correct</mat-error>
+        <app-dropdown-status formControlName="status"></app-dropdown-status>
       </div>
 
       <section>

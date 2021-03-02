@@ -1,5 +1,5 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
-import { ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-dropdown-status',
@@ -24,58 +24,33 @@ export class DropdownStatusComponent implements OnInit, ControlValueAccessor {
   onChange: (data : any) => void;
   onTouched: () => void;
   disable: boolean;
-  private status: 'available' | 'pending' | 'sold';
-  @Input('type') type;
+  public status = new FormControl('',[Validators.required]);
 
   constructor() { }
-  isSelect(statusIndex: number): boolean {
-    return !this.status ? false : (this.listStatus[statusIndex] === this.status);
-  }
+  
 
   ngOnInit(): void {
   }
 
   writeValue(obj: any): void {
-    this.status = obj;
+    this.status.setValue(obj);
   }
   registerOnChange(fn: any): void {
     this.onChange= fn;
   }
   registerOnTouched(fn: any): void {
-    this.onTouched = fn;
+    this.status.valueChanges.subscribe(fn);
   }
   setDisabledState?(isDisabled: boolean): void {
     this.disable = isDisabled;
   }
 
   handleOnStatusChange(e) {
-    const statusId = parseInt(e.target.value);
-    const statusSelect = this.listStatus.find(status => status === this.listStatus[statusId]);
-    if(statusSelect){
-      this.isBooleanCheck = false; 
-    }
+    const statusSelect = e.target.value;
     this.writeValue(statusSelect);
     this.onChange(statusSelect);
   }
-
   validate(c: FormControl){
-    if(!this.status){
-      return null;
-    }
-    return this.status !== this.type ? null : {
-      type: {
-        valid: false,
-        actual: c.value
-      }
-    }
-  }
-
-  isBooleanCheck = false;
-  checkValidationStatus(){
-    if(!this.status){
-      this.isBooleanCheck = true; 
-    }else{
-      this.isBooleanCheck = false; 
-    }
+    return this.status.valid ? null : { invalidForm: {valid: false}  }
   }
 }

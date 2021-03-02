@@ -16,8 +16,8 @@ export class CreatePetComponent implements OnInit {
     category: {
       id: new FormControl('', [Validators.required]),
     },
-    tags: new FormControl(''),
-    status: new FormControl('', [Validators.required]),
+    tags: new FormControl('', [Validators.required]),
+    status: new FormControl(''),
     photoUrls: new FormControl(''),
   });
   listCategory: any =[];
@@ -39,13 +39,14 @@ export class CreatePetComponent implements OnInit {
   addPet(){
     this.listPhotoUrls.push(this.pet.value.photoUrls);
     this.pet.value.photoUrls=[];
-    this.pet.controls['tags'].setValue(this.listCheckTag);
+    
     if(this.listCheckTag.length === 0){
       this.isValidateTag = true;
       return;
     }
     this.pet.controls['category'].setValue(this.dataCategory);
-    this.pet.controls['id'].setValue(2323);
+    this.pet.controls['id'].setValue(Math.floor(Math.random() * (10000 - 1 + 1)) + 1);
+    debugger;
     this.pet.value.photoUrls = this.listPhotoUrls;
     this.listCheckTag = [];
     this.listPhotoUrls= [];
@@ -81,11 +82,9 @@ export class CreatePetComponent implements OnInit {
     }else{
       this.isValidateTag = false;
     }
+    this.pet.controls['tags'].setValue(this.listCheckTag);
   }
-  
-  getControl(key: string): AbstractControl {
-    return this.pet.get(key);
-  }
+
 
   receiveMessage(e){
     this.dataCategory = e;

@@ -149,7 +149,5 @@ export class UpdatePetComponent implements OnInit {
       this.isValidatedPet = false;
     }
   }
-  getControl(key: string): AbstractControl {
-    return this.pet.get(key);
-  }
+  
 }

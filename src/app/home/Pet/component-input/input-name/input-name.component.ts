@@ -24,7 +24,6 @@ export class InputNameComponent implements OnInit, ControlValueAccessor,Validato
   public name = new FormControl('',[Validators.required, Validators.minLength(3), Validators.maxLength(10)]);
   onTouched: ()=> void;
   disabled: boolean;
-  @Input() childData: any;
 
   constructor() { }
 

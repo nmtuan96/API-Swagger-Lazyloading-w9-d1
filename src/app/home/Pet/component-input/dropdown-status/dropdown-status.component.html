@@ -1,8 +1,9 @@
 <mat-form-field appearance="fill">
         <mat-label>Status: </mat-label>
-        <select (change)="handleOnStatusChange($event)" (focus)="onTouched()" [disabled]="disable" (click)="checkValidationStatus()" matNativeControl required>
-            <option *ngFor="let status of listStatus, let i = index" [value]="i" [selected]="isSelect(i)">{{status}}</option>
+        <select (click)="handleOnStatusChange($event)" [formControl]="status" matNativeControl required>
+            <option *ngFor="let status of listStatus, let i = index" value="{{status}}">{{status}}</option>
         </select>
-        
+        <mat-error *ngIf="status.invalid && (status.dirty || status.touched)">
+            <div *ngIf="status.errors.required">Status is Required</div>
+        </mat-error>
 </mat-form-field>
-<mat-error *ngIf="isBooleanCheck">Choose Status!</mat-error>
